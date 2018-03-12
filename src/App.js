@@ -1,10 +1,17 @@
-import React, { Component } from 'react';
+// orden de los imports componentes de react, redux, componentes , estilo
+
+import React, { Component } from 'react'; 
+//import PropTypes from 'prop-types';  
+//import { connect } from 'react-redux';
+//import { createStore } from 'redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
-import LocationList from './components/LocationList';
-import ForecastExtended from './components/ForecastExtended';
+import LocationListContainer from './containers/LocationListContainer';
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
+//import { setCity } from './actions';
+//import { store } from './store';
 import './App.css';
 
 const cities = [
@@ -17,19 +24,7 @@ const cities = [
 ];
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      city: null
-    }
-  }
-
-  handleSelectionLocation = (city) => {
-    this.setState ({city});
-    console.log(`handleSelectionLocation ${city}`);
-  }
   render() {
-    const { city } = this.state;
     return (
       <MuiThemeProvider>
         <Grid>
@@ -40,40 +35,25 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <LocationList 
-                cities = { cities }
-                onSelectedLocation = {this.handleSelectionLocation}>
-              </LocationList>
+              <LocationListContainer cities = { cities }>
+              </LocationListContainer>
             </Col>
             <Col xs={12} md={6}>
               <Paper zDepth={4}>
                 <div className="detail">
-                  {
-                    city === null ? null
-                    : <ForecastExtended
-                    city = {city}>
-                    </ForecastExtended>
-                  }
-                
+                 <ForecastExtendedContainer>
+                 </ForecastExtendedContainer>
                 </div>
               </Paper>  
             </Col>
           </Row>
         </Grid>
       </MuiThemeProvider>
-
-
-      /*
-      <MuiThemeProvider>
-        <div className="App">
-          <LocationList cities = { cities }
-          onSelectedLocation = {this.handleSelectionLocation}>
-          </LocationList>
-        </div>
-      </MuiThemeProvider>
-      */
     );
   }
 }
 
 export default App;
+
+//connect recibe dos funciones. El (App) es un componente de clase
+//el resultado de esas funciones se le agrega a App

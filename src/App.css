@@ -26,3 +26,9 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.detail{
+  background-color: #999;
+  height: 85vh;
+  overflow: auto; /* elementos no se salgan del contenedor */
+  padding: 0 20px;
+}
